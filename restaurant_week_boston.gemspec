@@ -1,8 +1,11 @@
 # -*- encoding: utf-8 -*-
 
+$LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
+require 'restaurant_week_boston/version'
+
 Gem::Specification.new do |s|
   s.name = %q{restaurant_week_boston}
-  s.version = "1.0.1"
+  s.version = RestaurantWeekBoston::VERSION
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Gabe Berke-Williams"]
