@@ -34,7 +34,7 @@ Or maybe Artu's dinner sounds better:
     Parsing doc...done.
 
     === LUNCH ===
-    Name: Asana (short-name: asana)
+    Name: Asana
     Meals: Lunch, Dinner
     Neighborhood: Back Bay
     Phone: 617-535-8800
@@ -42,7 +42,7 @@ Or maybe Artu's dinner sounds better:
     Dinner Menu: http://www.restaurantweekboston.com/fetch/asana/dinner/
     Map: http://www.restaurantweekboston.com/map/back-bay/asana/#topOfMap
     --------------------------------------------------------------------------------
-    Name: Bond (short-name: bond)
+    Name: Bond
     Meals: Lunch, Dinner
     Neighborhood: Downtown
     Phone: 617-451-1900
@@ -51,14 +51,14 @@ Or maybe Artu's dinner sounds better:
     Map: http://www.restaurantweekboston.com/map/downtown/bond/#topOfMap
 
     === DINNER ===
-    Name: Bergamot (short-name: bergamot)
+    Name: Bergamot
     Meals: Dinner
     Neighborhood: Somerville
     Phone: <no phone given>
     Dinner Menu: http://www.restaurantweekboston.com/fetch/bergamot/dinner/
     Map: http://www.restaurantweekboston.com/map/somerville/bergamot/#topOfMap
     --------------------------------------------------------------------------------
-    Name: Clink. at the Liberty Hotel (short-name: clink)
+    Name: Clink. at the Liberty Hotel
     Meals: Lunch, Dinner
     Neighborhood: Beacon Hill
     Phone: 617-224-4004
@@ -67,7 +67,7 @@ Or maybe Artu's dinner sounds better:
     Map: http://www.restaurantweekboston.com/map/beacon-hill/clink/#topOfMap
 
     === LUNCH OR DINNER ===
-    Name: Aquitaine Bis (short-name: aquitaine-bis)
+    Name: Aquitaine Bis
     Meals: Lunch, Dinner
     Neighborhood: Chestnut Hill
     Phone: 617-734-8400
