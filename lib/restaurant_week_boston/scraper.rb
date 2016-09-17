@@ -7,33 +7,14 @@ module RestaurantWeekBoston
   # Scrapes Restaurant Week site.
   class Scraper
     include Enumerable
-    # +opts+ is a hash of options, with the following keys:
-    # :neighborhood:: dorchester, back-bay, etc. (default: "all")
-    # :meal:: lunch, dinner, both, or any (default: "any").  Will create a
-    # file in your home directory called ".restaurant_week_boston.cache"
-    # which contains the HTML from the RWB site, just so it doesn't have to
-    # keep getting it. You can delete that file, it'll just take longer next
-    # time since it will have to re-get the HTML.
-    def initialize(opts = {})
-      @url = create_url(opts)
-      @dump = File.expand_path('~/.restaurant_week_boston.cache')
+
+    URL = "http://www.restaurantweekboston.com/?neighborhood=all&meal=all&view=all&cuisine=all"
+
+    def initialize
+      @cache = File.expand_path('~/.restaurant_week_boston.cache')
       entries = doc().css('.restaurantEntry')
-      @restaurants = entries.map{ |entry| Restaurant.new(entry) }
+      @restaurants = entries.map { |entry| Restaurant.new(entry) }
     end
-
-    # +opts+ is a hash of options, with the following keys:
-    # :neighborhood:: dorchester, back-bay, etc. (default: :all)
-    # :meal:: lunch, dinner, both, or any (default: :any)
-    def create_url(opts = {})
-      # meal: any/lunch/dinner/both
-      # &view=all
-      default_opts = {:neighborhood => :all,
-                      :meal => :any }
-      opts = default_opts.merge!(opts)
-      sprintf('http://www.restaurantweekboston.com/?neighborhood=%s&meal=%s&view=all',
-              opts[:neighborhood].to_s, opts[:meal].to_s)
-    end
-
 
     # Iterates over @restaurants. All methods in Enumerable work.
     def each(&blk)
@@ -43,13 +24,11 @@ module RestaurantWeekBoston
     # Returns the result of open()ing the url from create_url(), as a String.
     def get_html
       print "Getting doc..."
-      if File.size? @dump
-        html = File.read(@dump)
+      if File.size?(@cache)
+        html = File.read(@cache)
       else
-        html = open(@url).read()
-        f = File.new(@dump, 'w')
-        f.write(html)
-        f.close()
+        html = open(URL).read
+        IO.write(@cache, html)
       end
       puts "done."
       html
@@ -71,15 +50,12 @@ module RestaurantWeekBoston
     # thinking of, and this will get those. So, if you're thinking of Bond,
     # 224 Boston Street, and Artu, you can pass in ['bond', 'boston street',
     # 'artu'].
-    def special_find(array)
-      array.map! do |name|
-        /#{Regexp.escape(name)}/i
-      end
+    def special_find(names)
       results = @restaurants.find_all do |restaurant|
-        array.detect{ |regexp| regexp =~ restaurant.name }
+        names.detect { |name| name.casecmp(restaurant.name) == 0 }
       end
       # Add separators
-      results.join("\n" + '-' * 80 + "\n")
+      results.join("\n" + ("-" * 80) + "\n")
     end
   end
 end

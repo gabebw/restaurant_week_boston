@@ -4,6 +4,8 @@ module RestaurantWeekBoston
   # Uses a given Scraper and marks restaurants as good for lunch, dinner, any,
   # etc.
   class Marker
+    NONE_REQUESTED = '[No restaurants requested]'
+
     # +opts+ is a hash with keys for +:lunch+, +:dinner+, and +:any+.
     # The values of each of these keys should be an array suitable for passing
     # to Scraper#special_find().
@@ -12,52 +14,41 @@ module RestaurantWeekBoston
       @opts = opts
     end
 
+    # Print all of the requested restaurants.
+    def all
+      lunch
+      puts
+      dinner
+      puts
+      any
+    end
+
+    private
+
     # Print out restaurants that are good for lunch.
     def lunch
-      unless @lunch
-        if @opts.key?(:lunch)
-          @lunch = @scraper.special_find(@opts[:lunch])
-        else
-          @lunch = '[no lunch options specified]'
-        end
-      end
       puts "=== LUNCH ==="
-      puts @lunch
+      puts find(@opts[:lunch])
     end
 
     # Print out restaurants that are good for dinner.
     def dinner
-      unless @dinner
-        if @opts.key?(:dinner)
-          @dinner = @scraper.special_find(@opts[:dinner])
-        else
-          @dinner = '[no dinner options specified]'
-        end
-      end
       puts "=== DINNER ==="
-      puts @dinner
+      puts find(@opts[:dinner])
     end
 
     # Print out restaurants that are good for lunch or dinner.
     def any
-      unless @any
-        if @opts.key?(:any)
-          @any = @scraper.special_find(@opts[:any])
-        else
-          @any = '[no "lunch or dinner" options specified]'
-        end
-      end
       puts "=== LUNCH OR DINNER ==="
-      puts @any
+      puts find(@opts[:any])
     end
 
-    # Print lunch(), dinner(), and any(), with newlines between them.
-    def all
-      lunch()
-      puts
-      dinner()
-      puts
-      any()
+    def find(names)
+      if names
+        @scraper.special_find(names)
+      else
+        NONE_REQUESTED
+      end
     end
   end
 end

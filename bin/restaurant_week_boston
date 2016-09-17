@@ -2,4 +2,4 @@
 
 require 'restaurant_week_boston'
 runner = RestaurantWeekBoston::Runner.new(ARGV)
-runner.run()
+runner.run
