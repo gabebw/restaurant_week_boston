@@ -4,7 +4,8 @@ This is just a silly little gem I made that parses the [Restaurant Week
 Boston](http://www.restaurantweekboston.com/) website and lets you mark which
 ones you want to go to for lunch, dinner, or lunch and dinner. This gem assumes
 you have a few restaurants in mind and want to quickly compare their
-lunch/dinner menus in tabs.
+lunch/dinner menus. It prints out direct links to lunch/dinner menus, which you
+can then open in your browser or send to a friend.
 
 ## Installation
 
