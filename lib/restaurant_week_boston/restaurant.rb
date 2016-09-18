@@ -77,7 +77,7 @@ EOS
         link = @entry.css('a[@href*="neighborhood"]').first
         ugly_neighborhood = link.attributes['href'].value.sub('/?neighborhood=', '')
         # back-bay -> "Back Bay"
-        ugly_neighborhood.split('-').map { |x| x.capitalize }.join(' ')
+        ugly_neighborhood.split('-').map(&:capitalize).join(' ')
       end
     end
 
@@ -96,18 +96,14 @@ EOS
       end
     end
 
-    # +meal+ should be either "lunch" or "dinner"
+    # Meal is either "lunch" or "dinner"
     def menu_link_for(meal)
-      if meal == 'lunch'
-        "http://www.restaurantweekboston.com/fetch/#{short_name}/lunch/"
-      elsif meal == 'dinner'
-        "http://www.restaurantweekboston.com/fetch/#{short_name}/dinner/"
-      end
+      "http://www.restaurantweekboston.com/fetch/#{short_name}/#{meal}/"
     end
 
     # Return the URL to the map of this Restaurant at the RWB web site.
     def map_link
-      @map_link ||= "http://www.restaurantweekboston.com/map/#{neighborhood}/#{short_name}/#topOfMap"
+      "http://www.restaurantweekboston.com/map/#{neighborhood}/#{short_name}/#topOfMap"
     end
   end
 end
